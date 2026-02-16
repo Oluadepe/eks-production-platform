@@ -1,0 +1,16 @@
+# Copy to terraform/terraform.tfvars and adjust values.
+
+region           = "us-east-1"
+project          = "eks-prod"
+
+# DNS + TLS (Route53 + ACM)
+domain_name      = "example.com"
+demo_hostname    = "demo.example.com"
+route53_zone_id  = "Z1234567890ABCDE"
+
+# Option B: Let Terraform request/validate ACM for demo_hostname
+create_acm_certificate = true
+
+# Option A: If you already have ACM certificate, set:
+# create_acm_certificate = false
+# acm_certificate_arn    = "arn:aws:acm:us-east-1:123456789012:certificate/XXXX"

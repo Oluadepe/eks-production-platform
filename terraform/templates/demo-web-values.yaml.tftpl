@@ -1,0 +1,15 @@
+replicaCount: 3
+
+ingress:
+  enabled: true
+  className: alb
+  scheme: internet-facing
+  targetType: ip
+
+  hostname: ${hostname}
+
+  tls:
+    enabled: ${tls_enabled}
+    acmCertificateArn: ${acm_arn}
+    sslRedirect: "443"
+    listenPorts: '[{"HTTPS":443}]'

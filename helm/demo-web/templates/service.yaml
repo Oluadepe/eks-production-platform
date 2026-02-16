@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-web
+  namespace: demo
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: demo-web
+  ports:
+  - port: {{ .Values.service.port }}
+    targetPort: 80

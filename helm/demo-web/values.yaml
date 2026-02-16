@@ -1,0 +1,32 @@
+replicaCount: 3
+
+image:
+  repository: nginx
+  tag: "1.27"
+  pullPolicy: IfNotPresent
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 256Mi
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: true
+  className: alb
+  scheme: internet-facing
+  targetType: ip
+
+  # DNS + TLS (plug-and-play)
+  hostname: demo.example.com
+  tls:
+    enabled: true
+    acmCertificateArn: ""   # set this OR use Terraform output effective_acm_certificate_arn
+    sslRedirect: "443"
+    listenPorts: '[{"HTTPS":443}]'

@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-web
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/YOUR_GITHUB_USERNAME/eks-production-platform.git
+    targetRevision: main
+    path: helm/demo-web
+    helm:
+      valueFiles:
+        - values.yaml
+        # v1.2.3 GitOps: commit the Terraform-generated file below after `terraform apply`
+        - ../../generated/demo-web.values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,11 @@
+# Minimal values file for kube-prometheus-stack.
+# You can add persistent storage, dashboards, and alert routes as you mature the platform.
+
+grafana:
+  adminPassword: "change-me"
+  service:
+    type: ClusterIP
+
+prometheus:
+  prometheusSpec:
+    retention: 10d
